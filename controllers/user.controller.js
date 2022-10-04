@@ -27,12 +27,8 @@ exports.updateUser = async (req, res, next) => {
     try {
          UserModel.findOneAndUpdate(
             {_id: req.params.id},
-            {
-                $set: {
-                    bio: req.body.bio
-                }
-            },
-            { new: true, upsert: true, setDefaultsOnInsert: true},
+            { $set: {  bio: req.body.bio }},
+            { new: true, upsert: true, setDefaultsOnInsert: true },
             (err, docs) => {
                 if(!err) {
                     return res.send(docs)
@@ -44,25 +40,22 @@ exports.updateUser = async (req, res, next) => {
     } 
     
     catch (err) {
-        return res.status(500).json({ message: err});
+        return res.status(500).json({ message: err });
     }
-
-    // try {
-    //     UserModel.findByIdAndUpdate(
-    //         req.body.userId,
-    //         { $set: {picture: "./images/profil" + fileName}},
-    //         { new: true, upsert: true, setDefaultsOnInsert: true},
-    //         (err, docs) => {
-    //             if (!err) return res.send(docs);
-    //             else {
-    //                 return res.status(500).send({ message: err })
-    //             }
-    //         }
-    //     )
-    // }
-    // catch (err) {
-    //     return res.status(500).json({ message: err});
-    // }
+    try {
+        UserModel.findByIdAndUpdate(
+            {_id: req.params.id},
+            { $set: { picture: './images/profil/' + fileName}},
+            { new: true, upsert: true},
+            (err, docs) => {
+                if (!err) return res.send(docs);
+                else return res.status(500).send({ message: err });
+            }
+        )
+    }
+    catch(err) {
+        return res.status(500).json({ message: "ça marche pas trop bien "});
+    }
 }
 
 exports.deleteUser = async (req, res, next) => {
@@ -148,16 +141,6 @@ exports.getProfilPicture = (req, res, next) => {
           `${__dirname}/../images/profil/${fileName}`
         )
       );
-
-    UserModel.findByIdAndUpdate(
-        req.params.id,
-        { $set: { picture: './images/profil/' + fileName}},
-        { new: true, upsert: true},
-        (err, docs) => {
-            if (!err) return res.send(docs);
-            else return res.status(500).send({ message: err });
-        }
-     )
     }
 
 
