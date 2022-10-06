@@ -17,7 +17,7 @@ exports.createPost = async (req, res) => {
     let fileName;
 
     if (req.file !== null) {
-        const fileName = req.body.posterId + Date.now() + '.jpg';
+        fileName = req.body.posterId + Date.now() + '.jpg';
         
         req.params.id,
         { $push: { picture: `./images/posts/${fileName}`}},

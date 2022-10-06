@@ -23,7 +23,7 @@ app.get('/jwtid', requireAuth, (req, res) => {
     res.status(200).send(res.locals.user._id)
  })
 
-
+ 
 // server
 
 app.listen(process.env.PORT, () => {

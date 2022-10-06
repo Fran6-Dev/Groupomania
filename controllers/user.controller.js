@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { promisify } = require("util");
 const pipeline = promisify(require("stream").pipeline);
+const upload = require('../middleware/multer')
 
 exports.getAllUsers = async (req, res, next) => {
     const users = await UserModel.find().select('-password');
@@ -45,7 +46,7 @@ exports.updateUser = async (req, res, next) => {
     try {
         UserModel.findByIdAndUpdate(
             {_id: req.params.id},
-            { $set: { picture: './images/profil/' + fileName}},
+            { $set: { picture: `./images/profil/${filename}`}},
             { new: true, upsert: true},
             (err, docs) => {
                 if (!err) return res.send(docs);
@@ -56,6 +57,8 @@ exports.updateUser = async (req, res, next) => {
     catch(err) {
         return res.status(500).json({ message: "ça marche pas trop bien "});
     }
+
+    
 }
 
 exports.deleteUser = async (req, res, next) => {
@@ -131,17 +134,28 @@ exports.unfollow = async (req, res, next) => {
     }
 }
 
-exports.getProfilPicture = (req, res, next) => {
-    const fileName = req.body.pseudo + ".jpg";
-    console.log('TEST', req.body);
+// exports.getProfilPicture = (req, res, next) => {
+//     const fileName = req.body.pseudo + ".jpg";
+//     console.log('TEST', req.body);
 
-    pipeline(
-        req.file.stream,
-        fs.createWriteStream(
-          `${__dirname}/../images/profil/${fileName}`
-        )
-      );
-    }
+//     pipeline(
+//         req.file.stream,
+//         fs.createWriteStream(
+//           `${__dirname}/../images/profil/${fileName}`
+//         )
+//       );
+
+//       UserModel.findByIdAndUpdate(
+//         req.body.id,
+//         { $set: { picture: "./images/profil/" + fileName}},
+//         { new: true, upsert: true },
+//             (err, docs) => { 
+//                 if(!err) return res.send(docs);
+//                 else return res.stats(500).send({message : err})
+                
+//             }
+//       )
+//     }
 
 
 
