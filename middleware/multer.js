@@ -1,6 +1,5 @@
 const multer = require("multer");
 
-  let postname;
 
   const storage = multer.diskStorage({
 
@@ -10,13 +9,10 @@ const multer = require("multer");
         
     },
     filename: (req, file, callback) => {
-      postname = Date.now() + ".jpg";
          if(file.fieldname === "profil") callback(null, "user-profil.jpg");
-         else if(file.fieldname === "posts") callback(null, postname);
-        console.log('POST', postname)
+         else if(file.fieldname === "posts") callback(null, Date.now() + ".jpg");
     },
   });
-  console.log('POST22222', postname)
 
     const upload = multer({ storage : storage });
 

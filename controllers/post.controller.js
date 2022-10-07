@@ -29,7 +29,7 @@ exports.createPost = async (req, res) => {
     const newPost = new PostModel({
         posterId : req.body.posterId,
         message: req.body.message,
-        picture : req.file !== null ? "./images/posts/" + req.file.fileName : "",
+        picture : req.file !== null ? `./images/posts/${req.file.filename}` : "",
         video : req.body.video,
         likers: [],
         comments: [],
