@@ -63,7 +63,7 @@ exports.updateUser = async (req, res, next) => {
         )
     }
     catch(err) {
-        return res.status(500).json({ message: "ça marche pas trop bien "});
+        return res.status(500).json({ message: err});
     }
 
     

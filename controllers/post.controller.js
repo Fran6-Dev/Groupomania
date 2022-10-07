@@ -1,34 +1,35 @@
-const postModel = require('../models/post.model');
 const PostModel = require('../models/post.model');
 const UserModel = require('../models/user.model');
 const ObjectID = require('mongoose').Types.ObjectId;
+const fileName = require('../middleware/multer');
 
 exports.readPost = (req, res) => {
-    postModel.find((err, docs) => {
+    PostModel.find((err, docs) => {
         if (!err) res.send(docs);
         else console.log('Error to get data : ' + err);
     })
 }
 
 exports.createPost = async (req, res) => {
-    let fileName;
-
     if (req.file !== null) {
-        fileName = req.body.posterId + Date.now() + '.jpg';
-        
-        req.params.id,
-        { $push: { picture: `./images/posts/${fileName}`}},
+    try {
+        req.body.posterId,
+        { $push: { picture: `./images/posts/${req.body.picture}`}},
         { new: true, upsert: true},
         (err, docs) => {
             if(err) return res.status(400).json(err);
         }
+    }
+    catch(err) {
+        return res.status(400).send({message : "ça ne fonctionne pas"});
+    }
         
     }
 
     const newPost = new PostModel({
         posterId : req.body.posterId,
         message: req.body.message,
-        picture : req.file !== null ? "./images/posts" + fileName : "",
+        picture : req.file !== null ? "./images/posts/" + req.file.fileName : "",
         video : req.body.video,
         likers: [],
         comments: [],
