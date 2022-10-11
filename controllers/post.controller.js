@@ -1,7 +1,7 @@
+const postModel = require('../models/post.model');
 const PostModel = require('../models/post.model');
 const UserModel = require('../models/user.model');
 const ObjectID = require('mongoose').Types.ObjectId;
-const fileName = require('../middleware/multer');
 
 exports.readPost = (req, res) => {
     PostModel.find((err, docs) => {
@@ -11,22 +11,8 @@ exports.readPost = (req, res) => {
 }
 
 exports.createPost = async (req, res) => {
-    if (req.file !== null) {
-    try {
-        req.body.posterId,
-        { $push: { picture: `./images/posts/${req.body.picture}`}},
-        { new: true, upsert: true},
-        (err, docs) => {
-            if(err) return res.status(400).json(err);
-        }
-    }
-    catch(err) {
-        return res.status(400).send({message : "ça ne fonctionne pas"});
-    }
-        
-    }
 
-    const newPost = new PostModel({
+    const newPost = new postModel({
         posterId : req.body.posterId,
         message: req.body.message,
         picture : req.file !== null ? `./images/posts/${req.file.filename}` : "",
@@ -140,3 +126,41 @@ exports.unlikePost = async (req, res) => {
    }
 
 }
+
+// exports.commentPost = (req, res) => {
+//     if(!ObjectID.isValid(req.params.id))
+//     return res.status(400).send('ID unknown : ' + req.params.id);
+
+//     try {
+//         return PostModel.findByIdAndUpdate(
+//             req.params.id,
+//             {
+//                 $push: {
+//                     comments: {
+//                         commenterId: req.body.commenterId,
+//                         commenterPseudo: req.body.commenterPseudo,
+//                         text: req.body.text,
+//                         timestamp: new Date().getTime(),
+//                     }
+//                 }
+                
+//             },
+//             console.log('test', req.body.commenterId),
+//             { new: true },
+//             (err,docs) => {
+//                 if (!err) return res.send(docs);
+//                 else return res.status(400).send(err);
+//             }
+//         );
+//     } 
+//     catch (err) {
+//         return res.status(500).send(err);
+//     }
+// }
+// exports.editCommentPost = (req, res) => {
+    
+// }
+
+// exports.deleteCommentPost = (req, res) => {
+    
+// }
