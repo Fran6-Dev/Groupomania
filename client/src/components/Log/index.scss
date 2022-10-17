@@ -1,0 +1,61 @@
+@import '../../styles/settings';
+
+.connection-form {
+    @include flex-center;
+    height: 100vh;
+}
+
+.form-container {
+    background-color: $secondary;
+    @include flex-center;
+    width: 500px;
+    height: 500px;
+    border-radius: 40px;
+    box-shadow: 10px 5px 5px $tertiary;
+    
+}
+
+.form-container ul {
+    list-style-type: none;
+    position: relative;
+    bottom: 20px;
+    right: 30px;
+}
+
+.form-container li {
+    cursor: pointer;
+    line-height: 50px;
+    width: 150px;
+    @include flex-center;
+    border-radius: 40px;
+    background-color: $tertiary;
+    color: #fff;
+    margin-bottom: 10px;
+    &:hover {
+        background-color: $secondary;
+        border: 1px solid #fff;
+    }
+}
+
+.form-container .active-btn {
+    background-color: $primary;
+}
+
+input {
+    padding:10px;
+    border-radius: 10px;
+    border: none;
+}
+
+.btn {
+    width: 200px;
+    background-color: lightgrey;
+    border: none;
+    &:hover {
+        background-color:rgba(255, 0, 0, 0.807);
+        border: 1px solid #fff;
+    }
+}
+
+
+

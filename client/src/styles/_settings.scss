@@ -1,0 +1,21 @@
+@font-face {
+    font-family: Lato;
+    src: url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
+}
+
+$primary : #FD2D01;
+$secondary: #FFD7D7;
+$tertiary: #4E5166;
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  * {
+    font-family: "Lato";
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }

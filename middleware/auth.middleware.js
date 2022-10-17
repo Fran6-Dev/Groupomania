@@ -7,7 +7,7 @@ exports.checkUser = (req, res, next) => {
         jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
             if (err) {
                 res.locals.user = null;
-                res.cookie('jwt', '', { maxAge: 1});
+                res.cookie('jwt', '', { maxAge: 1 });
                 next();
             } else {
                 let user = await UserModel.findById(decodedToken.id);
@@ -21,7 +21,7 @@ exports.checkUser = (req, res, next) => {
     }
 }
 
-exports .requireAuth = (req, res, next) => {
+exports.requireAuth = (req, res, next) => {
     const token = req.cookies.jwt;
     if (token) {
         jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
@@ -35,4 +35,16 @@ exports .requireAuth = (req, res, next) => {
     } else {
         console.log('No token')
     }
+}
+
+exports.getName = (req, res, next) => {
+    const searchName = req.UserModel.pseudo;
+
+    if (searchName) {
+        localStorage.setItem('userPseudo', JSON.stringify(searchName));
+    } else {
+        console.log('Pas de pseudo trouvé');
+    }
+
+    res.status(200).json(searchName);
 }

@@ -1,0 +1,13 @@
+@import '../styles/settings';
+
+.login {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    left: 1800px;
+    bottom: 160px;
+}
+
+.logo {
+    @include flex-center;
+}
