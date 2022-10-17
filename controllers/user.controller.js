@@ -1,10 +1,14 @@
 const UserModel = require('../models/user.model');
 const ObjectID = require('mongoose').Types.ObjectId;
+<<<<<<< HEAD
 const fs = require('fs');
 const path = require('path');
 const { promisify } = require("util");
 const pipeline = promisify(require("stream").pipeline);
 const upload = require('../middleware/multer')
+=======
+
+>>>>>>> e480075 (changement de pdp)
 
 exports.getAllUsers = async (req, res, next) => {
     const users = await UserModel.find().select('-password');
@@ -46,7 +50,11 @@ exports.updateUser = async (req, res, next) => {
     try {
         UserModel.findByIdAndUpdate(
             {_id: req.params.id},
+<<<<<<< HEAD
             { $set: { picture: `./images/profil/${filename}`}},
+=======
+            { $set: { picture: `./images/profil/user-profil.jpg`}},
+>>>>>>> e480075 (changement de pdp)
             { new: true, upsert: true},
             (err, docs) => {
                 if (!err) return res.send(docs);
@@ -134,6 +142,7 @@ exports.unfollow = async (req, res, next) => {
     }
 }
 
+<<<<<<< HEAD
 // exports.getProfilPicture = (req, res, next) => {
 //     const fileName = req.body.pseudo + ".jpg";
 //     console.log('TEST', req.body);
@@ -156,6 +165,8 @@ exports.unfollow = async (req, res, next) => {
 //             }
 //       )
 //     }
+=======
+>>>>>>> e480075 (changement de pdp)
 
 
 

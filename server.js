@@ -1,28 +1,47 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const userRoutes = require('./routes/user.routes');
-const postRoutes = require('./routes/post.routes');
-require('dotenv').config({path: './config/.env'})
-require('./config/db');
-const {checkUser, requireAuth} = require('./middleware/auth.middleware')
-const app = express();
+const http = require("http");
+const app = require("./app");
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(cookieParser());
+// Renvoie un port valide sous la forme d'un numéro d'une chaine
+const normalizePort = (val) => {
+  const port = parseInt(val, 10);
 
+  if (isNaN(port)) {
+    return val;
+  }
+  if (port >= 0) {
+    return port;
+  }
+  return false;
+};
+const port = normalizePort(process.env.PORT || "3000");
+app.set("port", port);
 
-// routes 
-app.use('/api/user', userRoutes);
-app.use('/api/post', postRoutes);
+// Sert à rechercher les différentes erreurs et les gère de manière appropriée. Elle sont ensuite enregistrée dans le serveur
+const errorHandler = (error) => {
+  if (error.syscall !== "listen") {
+    throw error;
+  }
+  const address = server.address();
+  const bind =
+    typeof address === "string" ? "pipe " + address : "port: " + port;
+  switch (error.code) {
+    case "EACCES":
+      console.error(bind + " requires elevated privileges.");
+      process.exit(1);
+      break;
+    case "EADDRINUSE":
+      console.error(bind + " is already in use.");
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+};
 
-//jwt 
-app.get('*', checkUser);
-app.get('/jwtid', requireAuth, (req, res) => {
-    res.status(200).send(res.locals.user._id)
- })
+// Création du server avec le fichier app en parametre qui sera exécutée à chaque appel effectué au serveur
+const server = http.createServer(app);
 
+<<<<<<< HEAD
  
 // server
 
@@ -30,3 +49,13 @@ app.listen(process.env.PORT, () => {
     console.log(`Listening on port ${process.env.PORT}`)
 })
 
+=======
+server.on("error", errorHandler);
+server.on("listening", () => {
+  const address = server.address();
+  const bind = typeof address === "string" ? "pipe " + address : "port " + port;
+  console.log("Listening on " + bind);
+});
+
+server.listen(port);
+>>>>>>> e480075 (changement de pdp)

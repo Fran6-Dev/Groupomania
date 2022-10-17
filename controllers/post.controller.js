@@ -2,9 +2,6 @@ const postModel = require('../models/post.model');
 const PostModel = require('../models/post.model');
 const UserModel = require('../models/user.model');
 const ObjectID = require('mongoose').Types.ObjectId;
-const { promisify } = require ('util');
-const { uploadErrors } = require('../utils/errors.utils');
-const pipeline = promisify(require('stream').pipeline);
 
 exports.readPost = (req, res) => {
     postModel.find((err, docs) => {
@@ -27,8 +24,6 @@ exports.createPost = async (req, res) => {
         }
         
     }
-
-    
 
     const newPost = new PostModel({
         posterId : req.body.posterId,

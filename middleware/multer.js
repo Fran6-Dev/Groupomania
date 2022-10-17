@@ -1,11 +1,5 @@
+const UserModel = require('../models/user.model')
 const multer = require("multer");
-// const path = require("path")
-
-// const MIME_TYPES = {
-//     "image/jpg": "jpg",
-//     "image/jpeg": "jpg",
-//     "image/png": "png",
-//   };
 
   const storage = multer.diskStorage({
     destination: (req,file,callback) => {
@@ -14,7 +8,7 @@ const multer = require("multer");
         
     },
     filename: (req, file, callback) => {
-        callback(null, file.originalname);
+        callback(null, "user-profil.jpg");
     },
   });
 
