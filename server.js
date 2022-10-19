@@ -41,15 +41,12 @@ const errorHandler = (error) => {
 // Création du server avec le fichier app en parametre qui sera exécutée à chaque appel effectué au serveur
 const server = http.createServer(app);
 
-<<<<<<< HEAD
- 
 // server
 
 app.listen(process.env.PORT, () => {
-    console.log(`Listening on port ${process.env.PORT}`)
+  console.log(`Listening on port ${process.env.PORT}`)
 })
 
-=======
 server.on("error", errorHandler);
 server.on("listening", () => {
   const address = server.address();
@@ -58,4 +55,3 @@ server.on("listening", () => {
 });
 
 server.listen(port);
->>>>>>> e480075 (changement de pdp)
