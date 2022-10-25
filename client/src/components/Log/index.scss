@@ -2,7 +2,7 @@
 
 .connection-form {
     @include flex-center;
-    height: 100vh;
+    height: 60vh;
 }
 
 .form-container {
@@ -11,7 +11,7 @@
     width: 500px;
     height: 500px;
     border-radius: 40px;
-    box-shadow: 10px 5px 5px $tertiary;
+  
     
 }
 

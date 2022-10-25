@@ -1,24 +1,27 @@
-import React, { useContext, useEffect } from 'react'
-import { NameContext } from '../Context/NameContext'
-import axios from "axios";
-
+import React from 'react'
+import './UpdateProfil.scss';
 
 const UpdateProfil = () => {
-    const name = useContext(NameContext);
 
-    // useEffect( async () => {
-    //     const name = await axios (process.env.REACT_APP_API_URL'')
-    // })
-
-
-
-
-    console.log('TEST', name);
-
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
 
     return (
-        <div>
-            <h1> Profil de Francis </h1>
+        <div className='container-profil'>
+            <div className="title">
+                <h3> Profil de {userInfo.pseudo}</h3>
+            </div>
+            <br />
+            <div className="img-profil">
+                <img src={userInfo.picture} alt="user-pic" className='img-size' />
+            </div>
+            <br />
+            <div className="bio-profil">
+                <h4>Bio</h4>
+            </div>
+            <div className="bio-text">
+                <p>{userInfo.bio}</p>
+            </div>
+
         </div>
     )
 }

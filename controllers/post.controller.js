@@ -15,7 +15,7 @@ exports.createPost = async (req, res) => {
     const newPost = new postModel({
         posterId : req.body.posterId,
         message: req.body.message,
-        picture : req.file !== null ? `./images/posts/${req.file.filename}` : "",
+        // picture : req.file !== null ? `./images/posts/${req.file.filename}` : "",
         video : req.body.video,
         likers: [],
         comments: [],
@@ -24,9 +24,7 @@ exports.createPost = async (req, res) => {
     try {
         const post = await newPost.save();
         res.status(201).json(post);
-
-    }
-    catch(err) {
+    }  catch(err) {
         return res.status(400).send(err);
     }
 }
@@ -73,21 +71,24 @@ exports.likePost = async (req, res) => {
                 $push: { likers: req.body.id }
             },
             {new: true},
-            (err,docs) => {
+            (err, docs) => {
                 if (err) return res.status(400).send(err);
             }
         );
+           
          UserModel.findByIdAndUpdate(
             req.body.id,
             {
                 $push: {likes : req.params.id}
             },
-                {new: true},
-                (err, docs) => {
-                    if (!err) res.send(docs);
-                    else return res.status(400).send(err);
-                }
+            {new: true},
+            (err, docs) => {
+                if (!err) res.send(docs);
+                else return res.status(400).send(err);
+            }
         )
+            
+
     }
     catch (err){
         return res.status(400).send(err);

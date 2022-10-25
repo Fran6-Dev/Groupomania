@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema(
         email: {
             type: String,
             required: true,
-            validate : [isEmail],
+            validate: [isEmail],
             lowercase: true,
             unique: true,
             trim: true,
@@ -26,11 +26,11 @@ const userSchema = new mongoose.Schema(
             required: true,
             max: 1024,
             minLength: 6,
-            
+
         },
         picture: {
             type: String,
-            default: "./images/profil/random-user.jpg"
+            default: ".client/public/images/profil/random-user.jpg"
         },
         bio: {
             type: String,
@@ -53,7 +53,7 @@ const userSchema = new mongoose.Schema(
 
 //
 
-userSchema.pre("save", async function(next) {
+userSchema.pre("save", async function (next) {
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(this.password, salt);
     next();
@@ -61,7 +61,7 @@ userSchema.pre("save", async function(next) {
 
 userSchema.statics.login = async function (email, password) {
     const user = await this.findOne({ email });
-    if(user ) {
+    if (user) {
         const auth = await bcrypt.compare(password, user.password)
         if (auth) {
             return user;

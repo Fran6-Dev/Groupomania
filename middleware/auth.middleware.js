@@ -36,15 +36,3 @@ exports.requireAuth = (req, res, next) => {
         console.log('No token')
     }
 }
-
-exports.getName = (req, res, next) => {
-    const searchName = req.UserModel.pseudo;
-
-    if (searchName) {
-        localStorage.setItem('userPseudo', JSON.stringify(searchName));
-    } else {
-        console.log('Pas de pseudo trouvé');
-    }
-
-    res.status(200).json(searchName);
-}

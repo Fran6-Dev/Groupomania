@@ -1,18 +1,18 @@
 import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { UidContext } from './Context/AppContext'
-import { NameContext } from './Context/NameContext'
 import Logout from './Log/Logout'
 import './Navbar.scss'
 
 const Navbar = () => {
     const uid = useContext(UidContext);
-    const name = useContext(NameContext);
+
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
 
     return (
         <nav>
             <div className="nav-container">
-                <div className="logo">
+                <div>
                     <NavLink to="/">
                         <div className="logo">
                             <img src="./logo/navbar-logo.png" alt="logo barre de navigation" />
@@ -23,9 +23,9 @@ const Navbar = () => {
                     <ul>
                         <li></li>
                         <li className='welcome'>
-                            <NavLink to="">
-                                <h5>Bienvenue 'valeur dynamique'</h5>
-                            </NavLink>
+                            <div>
+                                <h3 className='welcome-text'>Bienvenue {userInfo.pseudo} !</h3>
+                            </div>
                         </li>
                         <Logout />
                     </ul>
