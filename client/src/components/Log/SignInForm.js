@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './index.scss';
 
 const SignInForm = () => {
     const [email, setEmail] = useState('');
@@ -33,7 +34,7 @@ const SignInForm = () => {
     }
 
     return (
-        <form action='' onSubmit={handleLogin} id="sign-up-form">
+        <form action='' onSubmit={handleLogin} id="sign-up-form" className='sign-up-form'>
             <label htmlFor='email'>Email</label>
             <br />
             <input type='text' name='email' id='email' onChange={(e) => setEmail(e.target.value)} value={email} />

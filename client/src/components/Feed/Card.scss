@@ -14,15 +14,12 @@
 
 .card-left {
     margin-left: 10px;
-}
-
-.card-right {
-
+    
 }
 
 .poster-pic { 
-    width: 150px;
-    border-radius: 20px;
+    width: 50px;
+    border-radius: 10px;
 }
 
 .send-msg {
@@ -31,8 +28,22 @@
     min-height: 100px;
     margin: 15px 0;
     border-radius: 20px;
+    width: 100%;
 }
 
 .card-pic {
     margin-top: 15px;
+    max-width: 100%;
+}
+
+.all-button, .button-container {
+    display: flex;
+}
+
+.pseudo h3,  .date {
+    margin-left: 15px;
+}
+
+.icon {
+    width: 30px;
 }

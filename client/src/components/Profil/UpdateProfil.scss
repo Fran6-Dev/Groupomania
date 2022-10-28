@@ -21,11 +21,13 @@
     max-height: 300px;
 }
 
-.bio-profil {
+.bio-profil, .bio-text {
     @include flex-center
 }
 
-.bio-text {
-    @include flex-center
+h6 {
+    @include flex-center;
+    font-style: italic;
+    padding-top: 20px;
 }
 

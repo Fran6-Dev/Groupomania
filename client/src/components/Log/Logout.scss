@@ -4,4 +4,10 @@
     position: relative;
     right: -30px;
     bottom: 150px;
+
+    @media screen and (max-width: 700px)
+     {
+        bottom: 100px;
+    }
+    
 } 

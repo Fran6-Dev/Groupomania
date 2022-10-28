@@ -1,28 +1,36 @@
 import React, { useState } from 'react';
 import '../Feed/Card.scss';
 import LikeButton from './LikeButton';
+import { useSelector, useDispatch } from 'react-redux';
+import { dateParser, isEmpty } from '../utils';
+import { updatePost } from '../../actions/post.actions';
+import DeleteCard from './DeleteCard';
 
 const Card = ({ post }) => {
 
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    const allUserInfo = JSON.parse(localStorage.getItem('allUserInfo'));
-    const [isLoading, setIsLoading] = useState(true);
+    const usersData = useSelector((state) => state.usersReducer);
+    const userData = useSelector((state) => state.userReducer);
+
     const [isUpdated, setIsUpdated] = useState(false);
     const [textUpdated, setTextUpdated] = useState(null);
+    const dispatch = useDispatch();
 
-    console.log(textUpdated);
-    const updateItem = async () => {
 
+    const updateItem = () => {
+        if (textUpdated) {
+            dispatch(updatePost(post._id, textUpdated))
+        }
+        setIsUpdated(false)
     }
-
 
     return (
         <li className='card-container' key={post._id}>
             <>
                 <div className='card-left'>
-                    <img src={
-                        allUserInfo.map((user) => {
+                    <img src={!isEmpty(usersData[0]) &&
+                        usersData.map((user) => {
                             if (user._id === post.posterId) return user.picture;
+                            else return null
                         }).join('')
                     }
                         alt="poster-pic" className='poster-pic' />
@@ -32,13 +40,15 @@ const Card = ({ post }) => {
                         <div className="pseudo">
                             <h3>
                                 {
-                                    allUserInfo.map((user) => {
+                                    usersData.map((user) => {
                                         if (user._id === post.posterId) return user.pseudo;
+                                        else return null;
                                     })}
                             </h3>
                         </div>
-                        {/* <span>{(post.createdAt)}</span> */}
+                        <span className='date'>{dateParser(post.createdAt)}</span>
                     </div>
+
                     <div className="send-msg">
                         {isUpdated === false && <p>{post.message}</p>}
                         {isUpdated && (
@@ -56,20 +66,26 @@ const Card = ({ post }) => {
                         )}
                         {post.picture && <img src={post.picture} alt="card-pic" className='card-pic' />}
                     </div>
-                    {userInfo._id === post.posterId && (
-                        <div className="button-container">
-                            <div onClick={() => setIsUpdated(!isUpdated)}>
-                                <img src="./images/icon/edit.svg" alt="edit-button" />
+                    <div className="all-button">
+
+                        {userData._id === post.posterId && (
+                            <div className="button-container">
+                                <div onClick={() => setIsUpdated(!isUpdated)}>
+                                    <img src="./images/icon/edit.svg" alt="edit-button" className='icon' />
+                                </div>
+                                <DeleteCard id={post._id} />
                             </div>
+                        )}
+                        <div>
+                            <LikeButton post={post} />
                         </div>
-                    )}
-                    <div>
-                        <LikeButton post={post} />
                     </div>
                 </div>
             </>
         </li >
     )
 }
+
+
 
 export default Card

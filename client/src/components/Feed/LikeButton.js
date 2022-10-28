@@ -1,47 +1,38 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { UidContext } from '../Context/AppContext';
-import axios from 'axios';
+import { likePost, unlikePost } from "../../actions/post.actions";
 
 const LikeButton = ({ post }) => {
     const [liked, setLiked] = useState(false);
     const uid = useContext(UidContext)
-    const [likes, setLikes] = useState(false)
+    const dispatch = useDispatch();
 
-    const like = () => { }
+    const like = () => {
+        dispatch(likePost(post._id, uid))
+        setLiked(true);
+    }
 
-    const unlike = () => { }
+    const unlike = () => {
+        dispatch(unlikePost(post._id, uid))
+        setLiked(false);
+    }
 
     useEffect(() => {
-        if (post.likers.includes(uid)) setLiked(true)
+        if (post.likers.includes(uid)) setLiked(true);
+        else setLiked(false);
     }, [uid, post.likers, liked])
-
-    // useEffect(() => {
-    //     const fetchPost = async (postId, userId) => {
-    //         await axios({
-    //             method: "patch",
-    //             url: `${process.env.REACT_APP_API_URL}api/post/like-post/` + postId,
-    //             data: { id: userId },
-    //         })
-    //             .then((res) => {
-    //                 setLikes(res.data);
-    //                 localStorage.setItem('Likes', JSON.stringify(res.data));
-
-    //             })
-    //             .catch((err) => console.log('No likes'));
-
-    //     }
-    //     fetchPost();
-    // }, []);
 
 
     return (
         <div className="like-container">
             {uid && liked === false && (
-                <img src="./images/icon/heart.svg" alt="like" onClick={like} />
+                <img src="./images/icon/heart.svg" alt="like" onClick={like} className='icon' />
             )}
             {uid && liked === true && (
-                <img src="./images/icon/heart-filled.svg" alt="unlike" onClick={unlike} />
+                <img src="./images/icon/heart-filled.svg" alt="unlike" onClick={unlike} className='icon' />
             )}
+            <span>{post.likers.length}</span>
         </div>
     )
 }
