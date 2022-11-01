@@ -1,0 +1,49 @@
+@import '../../styles/settings';
+
+.card-container {
+    background-color: $secondary;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 1fr 9fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+        
+}
+
+.card-left {
+    margin-left: 10px;
+    
+}
+
+.poster-pic { 
+    width: 50px;
+    border-radius: 10px;
+}
+
+.send-msg {
+    background-color: rgba(242, 70, 99, 0.42);
+    padding: 40px;
+    min-height: 100px;
+    margin: 15px 0;
+    border-radius: 20px;
+    width: 100%;
+}
+
+.card-pic {
+    margin-top: 15px;
+    max-width: 100%;
+}
+
+.all-button, .button-container {
+    display: flex;
+}
+
+.pseudo h3,  .date {
+    margin-left: 15px;
+}
+
+.icon {
+    width: 30px;
+}
