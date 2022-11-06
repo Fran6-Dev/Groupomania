@@ -41,6 +41,7 @@ exports.updatePost = (req, res) => {
     const updatedRecord = {
         message: req.body.message,
         picture: req.file ? "./images/posts/" + req.file.filename : "",
+
     }
 
     PostModel.findByIdAndUpdate(
@@ -64,30 +65,8 @@ exports.deletePost = (req, res) => {
             if (!err) res.send(docs);
             else console.log("Delete error : " + err);
         });
-
-    // PostModel.findByIdAndRemove(
-    //     "635eb1ca534b26c9a418b0f7",
-    //     (err, docs) => {
-    //         if (!err) res.send(docs);
-    //         else console.log("Delete error : " + err);
-    //     });
 }
 
-
-
-// exports.adminDeletePost = (req, res) => {
-//     PostModel.findByIdAndRemove(
-//         "635eb1ca534b26c9a418b0f7",
-//         (err, docs) => {
-//             if (!err) res.send(docs);
-//             else console.log("Delete error : " + err);
-//         });
-
-// }
-
-// exports.adminUpdatePost = (req, res) => {
-
-// }
 
 
 exports.likePost = async (req, res) => {

@@ -3,8 +3,7 @@ import '../Feed/Card.scss';
 import LikeButton from './LikeButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { dateParser, isEmpty } from '../utils';
-import { updatePost } from '../../actions/post.actions';
-import { addPost, getPosts } from '../../actions/post.actions';
+import { updatePost, getPosts } from '../../actions/post.actions';
 import DeleteCard from './DeleteCard';
 
 const Card = ({ post }) => {
@@ -18,40 +17,30 @@ const Card = ({ post }) => {
     const dispatch = useDispatch();
 
 
-
     const handlePicture = (e) => {
-        setPostPicture(e.target.files[0]);
-        console.log('TARGET', e.target.files[0])
+
+        let newPhoto;
+        if (e.target.files) {
+            newPhoto = e.target.files[0];
+        }
+        setFile(newPhoto);
+
+        console.log('NEW PHOTO', newPhoto)
+
+
     }
 
-    console.log('POSTPIC', postPicture);
 
-    const updateItem = () => {
-        if (textUpdated) {
-            dispatch(updatePost(post._id, textUpdated))
+
+    const updateItem = async () => {
+        if (textUpdated || postPicture) {
+            await dispatch(updatePost(post._id, textUpdated ?? post.message, file ?? post.picture));
+            dispatch(getPosts());
         }
         setIsUpdated(false)
 
-        if (postPicture) {
-            console.log('>>>>>>>>>>>>>>>')
-            const data = { ...post, picture: `./images/posts/${postPicture.name}` }
-            // const data = new FormData();
-            // data.append('posterId', userData._id);
-            // data.append('message', post.message);
-            // data.append('file', file);
-            console.log('OMG: ', data);
-            const message = textUpdated ?? post.message;
-            const picture = postPicture ? postPicture.name : undefined;
-            dispatch(updatePost(post._id, message, picture));
-            dispatch(getPosts());
-        }
-
-
-
-
     }
 
-    console.log('TEST', post[0]);
 
     return (
         <li className='card-container' key={post._id}>
@@ -92,7 +81,7 @@ const Card = ({ post }) => {
                         {isUpdated === false && post.picture && <img src={post.picture} alt="card-pic" className='card-pic' />}
                         {isUpdated && (
                             <div className="update-img">
-                                <input type="file" id='file-upload' name='file' accept='.jpg, .jpeg, .png' onChange={(e) => handlePicture(e)} />
+                                <input type="file" id='file' name='file' accept='.jpg, .jpeg, .png' onChange={(e) => handlePicture(e)} />
                             </div>
                         )}
                         {isUpdated && (

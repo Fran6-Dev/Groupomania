@@ -27,6 +27,7 @@ export const addPost = (data) => {
     }
 }
 
+
 export const likePost = (postId, userId) => {
     return (dispatch) => {
         return axios({
@@ -55,19 +56,23 @@ export const unlikePost = (postId, userId) => {
     };
 };
 
-export const updatePost = (postId, message, picture) => {
+export const updatePost = (postId, message, file) => {
     return (dispatch) => {
+
         return axios({
             method: 'put',
             url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
-            data: { message, picture }
+            data: { message, file },
+            headers: { 'Content-Type': 'multipart/form-data' }
         })
             .then((res) => {
-                dispatch({ type: UPDATE_POST, payload: { message, postId, picture } })
+                dispatch({ type: UPDATE_POST, payload: { postId, message, file } })
             })
             .catch((err) => console.log(err));
     }
+
 }
+
 
 export const deletePost = (postId) => {
     return (dispatch) => {
