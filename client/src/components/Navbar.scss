@@ -4,10 +4,23 @@
     width: 30px;
     height: 30px;
     position: relative;
-    left: 1800px;
-    bottom: 160px;
-}
+    right: -30px;
+    bottom: 150px;
 
+    @media screen and (max-width: 700px) {
+         bottom: 70px;
+     
+   }
+}
 .logo {
     @include flex-center;
+}
+
+.welcome-text {
+    margin-left: 20px;
+    font-size: 30px;
+}
+
+.nav-logo {
+    max-width: 100%;
 }

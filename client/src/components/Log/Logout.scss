@@ -2,6 +2,12 @@
     width: 30px;
     height: 30px;
     position: relative;
-    left: 1800px;
-    bottom: 160px;
+    right: -30px;
+    bottom: 150px;
+
+    @media screen and (max-width: 700px)
+     {
+        bottom: 100px;
+    }
+    
 } 

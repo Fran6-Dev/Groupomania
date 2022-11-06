@@ -9,6 +9,7 @@ const { checkUser, requireAuth, getName } = require('./middleware/auth.middlewar
 const app = express();
 
 
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", `${process.env.CLIENT_URL}`);
   res.setHeader(
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Credentials", "true");
   next();
 });
+
 
 app.use(express.json())
 app.use(bodyParser.json());
@@ -39,8 +41,6 @@ app.get('/jwtid', requireAuth, (req, res) => {
   res.status(200).send(res.locals.user._id)
 })
 
-// //get some info 
-// app.get('/name', getName)
 
 
 module.exports = app;

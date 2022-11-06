@@ -1,13 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { UidContext } from './components/Context/AppContext';
-import { NameContext } from './components/Context/NameContext';
 import Routes from "./components/Routes";
 import axios from "axios";
-
+import { useDispatch } from "react-redux";
+import { getUser } from "./actions/user.actions";
 
 const App = () => {
-  const [uid, setUid] = useState(null);
-  const [name, setName] = useState(null);
+
+  const id = useContext(UidContext);
+  // const currentPosts = JSON.parse(localStorage.getItem('post'));
+
+  const [uid, setUid] = useState(id);
+  const dispatch = useDispatch();
+  // const [name, setName] = useState(null);
+  // const [post, setPost] = useState(null);
+  // const [allUserInfo, setAllUserInfo] = useState(null);
+
 
   useEffect(() => {
     const fetchToken = async () => {
@@ -20,34 +28,15 @@ const App = () => {
           setUid(res.data);
         })
         .catch((err) => console.log('No token'));
-
     }
     fetchToken();
-  }, [uid]);
-
-  useEffect(() => {
-    const fetchName = async () => {
-      await axios({
-        method: "get",
-        url: `${process.env.REACT_APP_API_URL}name`,
-        withCredentials: true
-      })
-        .then((res) => {
-          setName(res.data);
-          console.log(res.data)
-        })
-        .catch((err) => console.log('No name'));
-
-    }
-    fetchName();
-  }, [name]);
+    if (uid) dispatch(getUser(uid))
+  }, [dispatch, uid]);
 
 
   return (
     <UidContext.Provider value={uid}>
-      <NameContext.Provider value={name}>
-        <Routes />
-      </NameContext.Provider>
+      <Routes />
     </UidContext.Provider>
   );
 };

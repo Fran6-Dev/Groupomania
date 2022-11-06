@@ -4,79 +4,84 @@ const ObjectID = require('mongoose').Types.ObjectId;
 
 exports.getAllUsers = async (req, res, next) => {
     const users = await UserModel.find().select('-password');
-    res.status(200).json(users);
+    return res.status(200).json(users);
 }
 
 exports.userInfo = (req, res, next) => {
-    if(!ObjectID.isValid(req.params.id))
+    if (!ObjectID.isValid(req.params.id))
         return res.status(400).send('ID unknown : ' + req.params.id)
 
-        UserModel.findById(req.params.id, (err, docs) => {
-            if(!err) res.send(docs);
-            else console.log('ID unknown : ' + err);
-        }).select('-password')
+    UserModel.findById(req.params.id, (err, docs) => {
+        if (!err) res.send(docs);
+        else console.log('ID unknown : ' + err);
+    }).select('-password')
 }
 
 exports.updateUser = async (req, res, next) => {
-    if(!ObjectID.isValid(req.params.id))
+    if (!ObjectID.isValid(req.params.id))
         return res.status(404).send('ID unknown : ' + req.params.id)
 
     try {
-         UserModel.findOneAndUpdate(
-            {_id: req.params.id},
-            { $set: {  bio: req.body.bio }},
+        UserModel.findOneAndUpdate(
+            { _id: req.params.id },
+            { $set: { bio: req.body.bio } },
             { new: true, upsert: true, setDefaultsOnInsert: true },
             (err, docs) => {
-                if(!err) {
+                if (!err) {
                     return res.send(docs)
                 } else {
-                    return res.status(500).send({ message : err })
+                    return res.status(500).send({ message: err })
                 }
             }
         )
-    } 
-    
+    }
+
     catch (err) {
         return res.status(500).json({ message: err });
     }
     try {
         UserModel.findByIdAndUpdate(
-            {_id: req.params.id},
-            { $set: { picture: `./images/profil/user-profil.jpg`}},
+            { _id: req.params.id },
+            { $set: { picture: `./images/profil/${req.body.pseudo}.jpg` } },
 
-            { new: true, upsert: true},
-            (err, docs) => {
-                if (!err) return res.send(docs);
-                else return res.status(500).send({ message: err });
-            }
+            { new: true, upsert: true },
+            // (err, docs) => {
+            //     if (!err) {
+            //         return res.send(docs)
+            //     } else {
+            //         return res.status(500).send({ message: err })
+            //     }
+            // }
         )
     }
-    catch(err) {
-        return res.status(500).json({ message: err});
+    catch (err) {
+        return res.status(500).json({ message: err });
     }
 
-    
+
 }
 
 exports.deleteUser = async (req, res, next) => {
-    if(!ObjectID.isValid(req.params.id))
+    if (!ObjectID.isValid(req.params.id))
         return res.status(400).send('ID unknown : ' + req.params.id)
 
     try {
         UserModel.remove({ _id: req.params.id }).exec();
-        res.status(200).json({ message: "Successfully deleted."});
+        res.status(200).json({ message: "Successfully deleted." });
     }
     catch (err) {
-        return res.status(500).json({ message : err });
+        return res.status(500).json({ message: err });
     }
 }
+
+
 
 // exports.follow = async (req, res, next) => {
 //     if(!ObjectID.isValid(req.params.id) || !ObjectID.isValid(req.body.idToFollow) )
 //         return res.status(400).send('ID unknown : ' + req.params.id)
 
 //     try {
-//     // add to the follower list 
+//     // add to the follower list
 //     UserModel.findByIdAndUpdate(
 //         req.params.id,
 //         { $push : { following: req.body.idToFollow}},
@@ -146,14 +151,13 @@ exports.deleteUser = async (req, res, next) => {
 //         req.body.id,
 //         { $set: { picture: "./images/profil/" + fileName}},
 //         { new: true, upsert: true },
-//             (err, docs) => { 
+//             (err, docs) => {
 //                 if(!err) return res.send(docs);
 //                 else return res.stats(500).send({message : err})
-                
+
 //             }
 //       )
 //     }
 
 
 
-    
