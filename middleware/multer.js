@@ -1,5 +1,6 @@
 const multer = require("multer");
 
+// Permet de gérer les fichiers entrants
 
 const storage = multer.diskStorage({
 

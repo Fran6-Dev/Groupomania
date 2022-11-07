@@ -5,6 +5,7 @@ const UserModel = require('../models/user.model');
 
 const ObjectID = require('mongoose').Types.ObjectId;
 
+// Permet d'afficher un post
 exports.readPost = (req, res) => {
     postModel.find((err, docs) => {
         if (!err) res.send(docs);
@@ -12,7 +13,7 @@ exports.readPost = (req, res) => {
     }).sort({ createdAt: -1 })
 }
 
-
+// Permet de creer un post
 exports.createPost = async (req, res) => {
 
     const newPost = new PostModel({
@@ -33,7 +34,7 @@ exports.createPost = async (req, res) => {
     }
 }
 
-
+// Permet de modifier un post
 exports.updatePost = (req, res) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send('ID unknown : ' + req.params.id)
@@ -55,6 +56,7 @@ exports.updatePost = (req, res) => {
     )
 }
 
+// Permet de supprimer un post
 exports.deletePost = (req, res) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send('ID unknown : ' + req.params.id)
@@ -68,7 +70,7 @@ exports.deletePost = (req, res) => {
 }
 
 
-
+// Permet de liker un post
 exports.likePost = async (req, res) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send('ID unknown : ' + req.params.id)
@@ -104,6 +106,7 @@ exports.likePost = async (req, res) => {
     }
 }
 
+// Permet de unliker un post
 exports.unlikePost = async (req, res) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send('ID unknown : ' + req.params.id)

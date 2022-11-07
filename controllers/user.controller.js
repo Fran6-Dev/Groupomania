@@ -1,12 +1,12 @@
 const UserModel = require('../models/user.model');
 const ObjectID = require('mongoose').Types.ObjectId;
 
-
+// Affiche tout les utilisateurs
 exports.getAllUsers = async (req, res, next) => {
     const users = await UserModel.find().select('-password');
     return res.status(200).json(users);
 }
-
+// Affiche les infos d'un utilisateur
 exports.userInfo = (req, res, next) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send('ID unknown : ' + req.params.id)
@@ -16,7 +16,7 @@ exports.userInfo = (req, res, next) => {
         else console.log('ID unknown : ' + err);
     }).select('-password')
 }
-
+// Permet de modifier un utilisateur
 exports.updateUser = async (req, res, next) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(404).send('ID unknown : ' + req.params.id)
@@ -61,6 +61,7 @@ exports.updateUser = async (req, res, next) => {
 
 }
 
+// Permet de supprimer un utilisateur
 exports.deleteUser = async (req, res, next) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send('ID unknown : ' + req.params.id)
