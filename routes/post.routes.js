@@ -3,7 +3,7 @@ const router = express.Router();
 const postController = require('../controllers/post.controller');
 const upload = require("../middleware/multer");
 
-
+// Route permettant de controller les posts au sein de l'application
 
 router.get('/', postController.readPost);
 router.post('/', upload.single('file'), postController.createPost);

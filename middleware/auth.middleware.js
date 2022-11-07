@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const UserModel = require('../models/user.model');
 
+// Verification de l'user à l'aide du jwt
 exports.checkUser = (req, res, next) => {
     const token = req.cookies.jwt;
     if (token) {
@@ -21,6 +22,7 @@ exports.checkUser = (req, res, next) => {
     }
 }
 
+// Permet de savoir si l'utilisateur est connecter grâce a son token
 exports.requireAuth = (req, res, next) => {
     const token = req.cookies.jwt;
     if (token) {

@@ -16,29 +16,23 @@ const Card = ({ post }) => {
     const [textUpdated, setTextUpdated] = useState(null);
     const dispatch = useDispatch();
 
-
+    // gestion du fichier de modification de l'image
     const handlePicture = (e) => {
-
         let newPhoto;
         if (e.target.files) {
             newPhoto = e.target.files[0];
         }
         setFile(newPhoto);
-
-        console.log('NEW PHOTO', newPhoto)
-
-
     }
 
 
-
+    // gestion des modifications du post
     const updateItem = async () => {
         if (textUpdated || postPicture) {
             await dispatch(updatePost(post._id, textUpdated ?? post.message, file ?? post.picture));
             dispatch(getPosts());
         }
         setIsUpdated(false)
-
     }
 
 

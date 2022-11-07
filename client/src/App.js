@@ -6,17 +6,14 @@ import { useDispatch } from "react-redux";
 import { getUser } from "./actions/user.actions";
 
 const App = () => {
-
+  // affiche l'id unique de l'utilisateur
   const id = useContext(UidContext);
-  // const currentPosts = JSON.parse(localStorage.getItem('post'));
+
 
   const [uid, setUid] = useState(id);
   const dispatch = useDispatch();
-  // const [name, setName] = useState(null);
-  // const [post, setPost] = useState(null);
-  // const [allUserInfo, setAllUserInfo] = useState(null);
 
-
+  // va chercher le token utilisateur
   useEffect(() => {
     const fetchToken = async () => {
       await axios({
