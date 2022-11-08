@@ -7,7 +7,7 @@ but de cet outil est de faciliter les interactions entre collègues. Le départe
 Groupomania a imaginé plusieurs fonctionnalités pour favoriser les échanges entre collègues.
 
 ## Lancer le projet
-Ce projet a été réalisé avec ReactJS pour le front et MongoDB pour le back et la base de données
+Ce projet a été réalisé avec ReactJS pour le front et Express.js pour le back et MongoDB pour la base de données
 
 # Back
 Ce rendre de la dossier mère intitulé mern-project et lancer la commande suivante: 
