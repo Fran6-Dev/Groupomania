@@ -5,7 +5,7 @@ const userRoutes = require('./routes/user.routes');
 const postRoutes = require('./routes/post.routes');
 require('dotenv').config({ path: './config/.env' })
 require('./config/db');
-const { checkUser, requireAuth, getName } = require('./middleware/auth.middleware')
+const { checkUser, requireAuth } = require('./middleware/auth.middleware')
 const app = express();
 
 
