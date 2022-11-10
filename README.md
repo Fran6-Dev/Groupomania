@@ -10,11 +10,15 @@ Groupomania a imaginé plusieurs fonctionnalités pour favoriser les échanges e
 Ce projet a été réalisé avec ReactJS pour le front et Express.js pour le back et MongoDB pour la base de données
 
 # Back
-Ce rendre de la dossier mère intitulé mern-project et lancer la commande suivante: 
+Lancer directement la commande suivante lorsque vous aurez fork le projet pour lancer le back: 
 npx nodemon server
 
 # Front
 Ce rendre dans le dossier client 'cd/client' puis lancer la commande suivante :
-npm start
+npm install puis npm start
 
 Vous devriez désormais être capable d'utiliser les fonctionnalités de l'application.
+
+Afin de sécuriser correctement l'application il y a des dossiers env comportant des clés masquéss.
+Pour facilité le lancement de celle-ci je les ai laissé visible de plein gré.
+En les utilisants vous ne devriez pas avoir de souci.
