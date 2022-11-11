@@ -9,7 +9,7 @@ Groupomania a imaginé plusieurs fonctionnalités pour favoriser les échanges e
 ## Lancer le projet
 Ce projet a été réalisé avec ReactJS pour le front et Express.js pour le back et MongoDB pour la base de données
 
-Afin de sécuriser correctement l'application il y a des dossiers env comportant des clés masquéss.
+Afin de sécuriser correctement l'application il y a des dossiers env comportant des clés masqués.
 Pour facilité le lancement de celle-ci je les ai laissé visible de plein gré.
 En les utilisants vous ne devriez pas avoir de souci.
 
