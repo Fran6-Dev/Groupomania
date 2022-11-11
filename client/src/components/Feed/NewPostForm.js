@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom';
 import { addPost, getPosts } from '../../actions/post.actions';
-import './NewPostForm.scss';
+import './NewPostForm.scss'
 
 const NewPostForm = () => {
     const [message, setMessage] = useState("");
