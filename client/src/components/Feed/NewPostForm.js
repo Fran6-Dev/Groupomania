@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom';
 import { addPost, getPosts } from '../../actions/post.actions';
-import './NewPostForm.scss';
+import './NewPostForm.scss'
 
 const NewPostForm = () => {
     const [message, setMessage] = useState("");
@@ -40,7 +40,7 @@ const NewPostForm = () => {
     }
 
     return (
-        <div className="post-container">
+        (userData._id) && (<div className="post-container">
             <div className="data">
                 <NavLink className='pseudo-feed' to="/profil">
                     <h3 className='profil-pseudo'>Que souhaitez-vous publier {userData.pseudo} ? </h3>
@@ -66,7 +66,7 @@ const NewPostForm = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div>)
     )
 }
 
