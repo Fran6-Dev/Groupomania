@@ -40,7 +40,7 @@ const NewPostForm = () => {
     }
 
     return (
-        <div className="post-container">
+        (userData._id) && (<div className="post-container">
             <div className="data">
                 <NavLink className='pseudo-feed' to="/profil">
                     <h3 className='profil-pseudo'>Que souhaitez-vous publier {userData.pseudo} ? </h3>
@@ -66,7 +66,7 @@ const NewPostForm = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div>)
     )
 }
 
