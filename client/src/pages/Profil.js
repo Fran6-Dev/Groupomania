@@ -1,11 +1,15 @@
 import React from 'react';
 import UpdateProfil from '../components/Profil/UpdateProfil'
+import { useSelector } from 'react-redux'
 
 const Profil = () => {
+
+  const userData = useSelector((state) => state.userReducer);
+
   return (
-    <div>
+    (userData._id) && (<div>
       <UpdateProfil />
-    </div>
+    </div>)
   );
 };
 
