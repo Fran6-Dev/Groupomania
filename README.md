@@ -1,5 +1,5 @@
 # Groupomania
-Projet 7 Formation développeur web OPC
+Projet 7 Formation développeur web OpenClassroom. Créer un réseau social d'entreprise
 
 # Contexte 
 Le projet consiste à construire un réseau social interne pour les employés de Groupomania. Le
@@ -29,3 +29,5 @@ npm install puis npm start
 
 Vous devriez désormais être capable d'utiliser les fonctionnalités de l'application.
 
+# Important
+Ici le style pourrait nettement améliorer, je me suis contenté du minimum au vu du temps qu'il me restait pour finir ma formation
